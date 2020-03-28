@@ -1,0 +1,52 @@
+#baekjoon 1157
+word=input()
+#1. for each letter in word, check if it's upper case or lower case
+#if lower case, change to upper case 
+#2. formulate dictionary for each alphabet, with its values the frequency of each letter
+
+frequency=dict()
+count=0
+for each_letter in word:
+    #specification number 1
+    if (each_letter.islower()==True):
+        each_letter=each_letter.upper()
+    #specification number 2
+    if (each_letter not in frequency):
+        frequency[each_letter]=0 
+    else:
+        frequency[each_letter]+=1
+
+itemMaxValue = max(frequency.items(), key=lambda x : x[1])
+for fre in frequency.values():
+    if (fre==itemMaxValue[1]):
+        count+=1
+#print(count)
+if (count>1):
+    print("?")
+else:
+    print(itemMaxValue[0])
+#comment: can I make it shorter???
+
+#baekjoon 2908
+a,b=map(int,input().split())
+newStrA=""
+newStrB=""
+for i in range(len(str(a))-1,-1,-1):
+	newStrA+=(str(a))[i]
+for j in range(len(str(b))-1,-1,-1):
+    newStrB+=(str(b))[j]
+if int(newStrA)>int(newStrB):
+    print(newStrA)
+else:
+    print(newStrB)
+    
+#baekjoon 5622
+letters=input()
+letterDic={'A':2,'B':2,'C':2,'D':3,'E':3,'F':3,'G':4,'H':4,'I':4,'J':5,'K':5,'L':5,'M':6,'N':6,
+'O':6,'P':7,'Q':7,'R':7,'S':7,'T':8,'U':8,'V':8,'W':9,'X':9,'Y':9,'Z':9}
+total_time=[]
+for each_letter in letters:
+    if each_letter in letterDic:
+        #print(letterDic[each_letter])
+        total_time.append(letterDic[each_letter])
+print(sum(total_time)+len(total_time))
