@@ -1,0 +1,390 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <string.h>
+int recursive(int n){
+    if (n==1){
+        return 1;
+    }
+    else{
+        return recursive(n-1)+1;
+    }
+}
+void function11(){
+    int i;
+    printf("Write a program to print first 50 natural numbers using recursion\n");
+    for (i=1;i<=50;i++){
+        printf("%d ",recursive(i));
+    }
+}
+int fibo(int a){
+    if (a==1){
+        return 1;
+    }
+    else if (a==2){
+        return 1;
+    }
+    else{
+        return fibo(a-1)+fibo(a-2);
+    }
+}
+void function12(){
+    int num,i;
+    printf("Write a program to print the Fibonacci series using recursion\n");
+    printf("Input the number of terms: ");
+    scanf("%d",&num);
+    for (i=1;i<=num;i++){
+        printf("%d ",fibo(i));
+    }
+}
+int gcd(int first, int second){
+    if (first%second==0){
+        return second;
+    }
+    else{
+        return gcd(second,first%second);
+    }
+    //example: first=45, second=10 
+    //gcd(45,10)->gcd(10,5)->return 5
+}
+void function13(){
+    int first, second;
+    printf("Write a program to find GCD of two numbers using recursion\n");
+    printf("Input first number: ");
+    scanf("%d",&first);
+    printf("Input second number: ");
+    scanf("%d",&second);
+    if (second>first){
+        //swap needed
+        int tmp;
+        tmp=first;
+        first=second;
+        second=tmp; //first and second value reversed. Now first value is bigger
+    }
+    printf("The GCD of %d and %d is %d",first,second,gcd(first,second));
+}
+int primeCheck(int num, int divisor){
+    //check if number is not a prime number
+    if (divisor==1){
+        return 1;
+    }
+    else{
+        if (num%divisor==0){
+            return 0;
+        }
+        else{
+            return primeCheck(num,divisor-1);
+        }
+    }
+}
+void function14(){
+    int number,i;
+    printf("Write a program to check if a number is a prime number using recursion\n");
+    printf("Input any positive number: ");
+    scanf("%d",&number);
+    int divisor = number/2;
+    if (primeCheck==1){
+        printf("The number %d is a prime number",number);
+    }
+    else{
+        printf("The number %d is not a prime number",number);
+    }
+}
+int powers(int base,int power){
+    if (power==0){
+        return 1;
+    }
+    else{
+        return powers(base,power-1)*base;
+    }
+}
+void function15(){
+    int base,power;
+    printf("Write a program to calculate the power of any numbers using recursion\n");
+    printf("Input the base value: ");
+    scanf("%d",&base);
+    printf("Input the value of power: ");
+    scanf("%d",&power);
+    printf("The value of %d to the power of %d is %d",base,power,powers(base,power));
+}
+void function16(){
+    int n;
+    printf("Write a program to read n number of values in an array and display it in reverse order\n");
+    printf("Input the size of the array: ");
+    scanf("%d",&n);
+    int arr[n];
+    int j,k,b;
+    printf("The values stored into the array are:\n");
+    for (j=0;j<n;j++){
+        scanf("%d",&b);
+        arr[j]=b;
+    }
+    for (k=sizeof(arr)/sizeof(int)-1;k>=0;k--){
+        printf("%d ",arr[k]);
+    }
+
+}
+void function17(){
+    int a,b,c,element;
+    int numArr[5];
+    printf("Write a program to count the total number of duplicates in an array\n");
+    printf("Enter 5 elements in the array\n");
+    for (a=0;a<5;a++){
+        scanf("%d",&element);
+        numArr[a]=element;
+    }
+    int countArray[5]={0};      //array that stores the frequency of each element
+    int cnt=0;
+    //printf("%d",sizeof(numArr)/sizeof(int));
+    for (b=0;b<5;b++){
+        for (c=b;c<5;c++){
+            if (b!=c && numArr[b]!=numArr[c]){
+                countArray[b]=1;
+            }
+            else if (b!=c && numArr[b]==numArr[c]){
+                countArray[b]=-1;
+                break;
+            }
+            else if (b==c && numArr[b]==numArr[b-1]){
+                countArray[b]=-1;
+            }
+        }
+    }
+    for (int d=0;d<5;d++){
+        if (countArray[d]==-1){
+            cnt+=1;
+        }
+    }
+    printf("The total number of duplicates is %d",cnt);
+}
+void function18(){
+    printf("Write a program to merge two arrays of the same size.\n");
+    int num;
+    printf("Enter how many elements there should be in each array.\n");
+    scanf("%d",&num);
+    int num1[num],num2[num];
+    int a,b,c;
+    int combination[2*num];
+    printf("Enter elements of array1\n");
+    for (a=0;a<num;a++){
+        scanf("%d",&num1[a]);
+        combination[a]=num1[a];  //1 2 3 4
+    }
+    printf("Enter elements of array2\n");
+    for (b=0;b<num;b++){
+        scanf("%d",&num2[b]);
+        combination[b+num]=num2[b]; //start from index 4 ->index 4,5,6,7 (0+4,1+4,2+4,3+4)
+    }
+    for (c=0;c<2*num;c++){
+        printf("%d ",combination[c]);
+    }
+}    
+void function19(){
+    /* use efficient way*/
+    int num,element;
+    int a,b,c,d;
+    int numArr[100];
+    int countArray[100];
+    printf("Write a program to count the frequency of each element\n");
+    printf("Enter how many elements there should be in an array\n");
+    scanf("%d",&num);
+    printf("Enter elements in the array\n");
+    for (a=0;a<num;a++){
+        scanf("%d",&element);
+        numArr[a]=element;
+        countArray[a]=-1;  //be careful!! initializaion!!
+    }
+	for (b=0;b<num;b++){
+		int count=1;
+		for (c=b+1;c<num;c++){
+			if (numArr[b]==numArr[c]){
+				count++;
+				countArray[c]=0;
+			}
+		}
+		if (countArray[b]!=0){
+			countArray[b]=count;
+		}
+	}
+	for (d=0;d<num;d++){
+		//printf("%d ",countArray[j]);
+		if (countArray[d]!=0){
+			printf("The appearance of element %d is %d\n",numArr[d],countArray[d]);
+		}
+	}
+        
+}
+void function20(){
+    int num;
+    int i,j,k;
+    printf("Write a program to find the maximum and minimum element of an array\n");
+    printf("Enter how many elements there should be in the array\n");
+    scanf("%d",&num);
+    int numArray[num];
+    printf("Enter the numbers of the array\n");
+    for (i=0;i<num;i++){
+        scanf("%d",&numArray[i]);
+    }
+    int max,min;
+    max=min=numArray[0];
+    for (j=1;j<num;j++){
+        if (numArray[j]>max){
+            max=numArray[j];
+        }
+    }
+    for (k=1;k<num;k++){
+        if (numArray[k]<min){
+            min=numArray[k];
+        }
+    }
+    printf("In this element, %d is the largest element and %d is the smallest element",max,min);
+    
+}
+void function21(){
+    int num;
+    int numArray[30];
+    int i,j,k,l;
+    int a; //supplement variable for swapping
+    printf("Write a program to sort elements of an array in ascending order\n");
+    printf("Enter how many elements the array contain\n");
+    scanf("%d",&num);
+    printf("Enter the elements in the array\n");
+    for (i=0;i<num;i++){
+        scanf("%d",&numArray[i]);
+    }
+    //comparison between adjacent elements
+    for (j=0;j<num;j++){
+        for (k=j+1;k<num;k++){
+            if (numArray[j]>numArray[k]){
+                a=numArray[k];
+                numArray[k]=numArray[j];
+                numArray[j]=a;
+            }
+        }
+    }
+    for (l=0;l<num;l++){
+        printf("%d ",numArray[l]);
+    }
+    
+}
+void function22(){
+    //first sort, than pull out the element
+    int num;
+    int numArray[50];
+    int i,j,k;
+    int a; //supplementary variable used when swapping
+    printf("Write a program to find the second smallest element of an array\n");
+    printf("Enter how many elements the array should contain\n");
+    scanf("%d",&num);
+    printf("Enter elements of the array\n");
+    for (i=0;i<num;i++){
+        scanf("%d",&numArray[i]);
+    }
+    for (j=0;j<num;j++){
+        for (k=j+1;k<num;k++){
+            if (numArray[j]>numArray[k]){
+                a=numArray[k];
+                numArray[k]=numArray[j];
+                numArray[j]=a;
+            }
+        }
+    }
+    printf("The second smallest element of the array is %d",numArray[1]);
+    
+}
+void function23(){
+    printf("Write a program for a 2D array of size 3 X 3 and print the matrix\n");
+    int matrix[3][3];
+    int i,j,l,k;
+    printf("Enter the elements of the array\n");
+    for (i=0;i<3;i++){
+        for (j=0;j<3;j++){
+            scanf("%d",&matrix[i][j]);
+        }
+    }
+    for (l=0;l<3;l++){
+        for (k=0;k<3;k++){
+            printf("%d ",matrix[l][k]);
+        }
+        printf("\n");
+    }
+}
+void function24(){
+    int matrix1[3][3];
+    int matrix2[3][3];
+    int subMatrix[3][3];
+    int i,j,l,k,m,n,a,b;
+    printf("Write a program for subtraction of two matrices\n");
+    printf("Enter elements for the first matrix1\n");
+    for (i=0;i<3;i++){
+        for (j=0;j<3;j++){
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+    printf("Enter elements for the second matrix\n");
+    for (l=0;l<3;l++){
+        for (k=0;k<3;k++){
+            scanf("%d",&matrix2[l][k]);
+        }
+    }
+    for (m=0;m<3;m++){
+        for (n=0;n<3;n++){
+            subMatrix[m][n]=matrix1[m][n]-matrix2[m][n];
+        }
+    }
+    for (a=0;a<3;a++){
+        for (b=0;b<3;b++){
+            printf("%d ",subMatrix[a][b]);
+        }
+        printf("\n");
+    }
+    
+}
+void function25(){
+    int matrix[2][2];
+    int a,b,c,d;
+    int summation=0;
+    printf("Write a program to find the sum of the right diagonals of a matrix\n");
+    printf("Enter elements for the matrix\n");
+    for (a=0;a<2;a++){
+        for (b=0;b<2;b++){
+            scanf("%d",&matrix[a][b]);
+        }
+    }
+    for (c=0;c<2;c++){
+        for (d=0;d<2;d++){
+            if (c==d){
+                summation+=matrix[c][d];
+            }
+        }
+    }
+    printf("The sum of the right diagonal of the matrix is %d",summation);
+    
+}
+int main()
+{
+    //function11();
+    //function12();
+    //function13();
+    //function14();
+    //function15();
+    //function16();
+    //function17();
+    //function18();
+    //function19();
+    //function20();
+    //function21();
+    //function22();
+    //function23();
+    //function24();
+    function25();
+}
+
+
+
