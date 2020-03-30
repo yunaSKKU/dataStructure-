@@ -1,0 +1,55 @@
+class CircularQueue:
+    def __init__(self,size):
+        self.size=size
+        self.queue=[None]*size
+        self.front=-1
+        self.rear=-1
+        #empty state, initialize to -1
+    def is_empty(self):
+        if (self.front==self.rear and self.front==-1):
+            return True
+        else:
+            return False
+    def is_full(self):
+        if (self.rear+1)%self.size==self.front:
+            return True
+        else:
+            return False
+    def enqueue(self,value):
+        if self.is_empty():
+            self.queue[0]=value
+            self.front+=1
+            self.rear+=1
+        #full일 때
+        elif self.is_full():
+            print("QUEUE IS FULL")
+        else:
+            self.rear=(self.rear+1)%self.size
+            self.queue[self.rear]=value
+    def dequeue(self):
+        if self.is_empty():
+            print("QUEUE IS EMPTY")
+        else:
+            self.queue[self.front]=None
+            self.front=(self.front+1)%self.size
+            if (self.rear+1)%self.size==self.front:
+                self.front=-1
+                self.rear=-1
+    def printElement(self):
+        if self.is_empty():
+            print( "NOTHING TO PRINT!")
+        else:
+            print(self.queue)
+    
+queue=CircularQueue(5) #size 5
+queue.enqueue(1)
+queue.enqueue(2)
+queue.printElement() #expected result: 1,2
+queue.dequeue()
+queue.printElement() #expected result:2
+queue.enqueue(3)
+queue.enqueue(4)
+queue.enqueue(5)
+queue.enqueue(6)
+queue.printElement() #expected result:6 2 3 4 5
+queue.enqueue(7) #expected result: error message 
