@@ -1,0 +1,37 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+
+int main()
+{
+    int numArr[5];
+    int i,j,k,l;
+    printf("Implementing Insertion Sort\n");
+    printf("Enter an array of numbers(there are 5 elements in this array)\n");
+    for (i=0;i<5;i++){
+        scanf("%d",&numArr[i]);
+    }
+    for (j=0;j<4;j++){
+        int minIndex=j;
+        for (k=j;k<5;k++){
+            if (numArr[k]<numArr[minIndex]){
+                minIndex=k;
+            }
+        }
+        //swap(&numArr[j],&numArr[minIndex])
+        int tmp;
+        //swapping numArr[j] and numArr[minIndex]
+        tmp=numArr[j];
+        numArr[j]=numArr[minIndex];
+        numArr[minIndex]=tmp;
+    }
+    for (l=0;l<5;l++){
+        printf("%d ",numArr[l]);
+    }
+}
