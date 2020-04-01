@@ -1,0 +1,361 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, PHP, Ruby, 
+C#, VB, Perl, Swift, Prolog, Javascript, Pascal, HTML, CSS, JS
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+void function26(){
+    int r1,r2,c1,c2,i,j;
+    printf("Write a program to accept two matrices and check whether they are equal\n");
+    printf("Enter how many rows the first matrix has\n");
+    scanf("%d",&r1);
+    printf("Enter how many columns the first matrix has\n");
+    scanf("%d",&c1);
+    printf("Enter how many rows the second matrix has\n");
+    scanf("%d",&r2);
+    printf("Enter how many columns the second matrix has\n");
+    scanf("%d",&c2);    
+    
+    int matrix1[r1][c1], matrix2[r2][c2];
+    printf("Enter elements for the first matrix\n");
+    for (i=0;i<r1;i++){
+        for (j=0;j<c1;j++){
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+    printf("Enter elements for the second matrix\n");
+    for (i=0;i<r2;i++){
+        for (j=0;j<c2;j++){
+            scanf("%d",&matrix2[i][j]);
+        }
+    }
+    printf("Checking if the two matrices are equal\n");
+    if (r1!=r2 || c1!=c2){
+        printf("The two matrices are not equal");
+    }
+    else if (r1==r2 && c1==c2){
+        for (i=0;i<r1;i++){
+            for (j=0;j<c1;j++){
+                if (matrix1[i][j]==matrix2[i][j]){
+                    printf("The two matrices are equal");
+                }
+                else{
+                    printf("The two matrices are not equal");
+                }
+            }
+        }
+    }
+
+}
+void function27(){
+    int numArr[5];
+    int cntArr[5];
+    int i,j,k,l;
+    int finalMaxi;
+    printf("Write a program to find the largest sum of the contiguous subarray of an array\n");
+    printf("This array can contains 5 elements\n");
+    printf("Enter the elements of the array\n");
+    for (i=0;i<5;i++){
+        scanf("%d",&numArr[i]);
+    }
+    for (j=0;j<5;j++){
+        int maxi=numArr[j];
+        int current=maxi;
+        for (k=j+1;k<5;k++){
+            current+=numArr[k];
+            if (current>=maxi){
+                maxi=current;
+            }
+        }
+        //biggest sum of contiguous subarray for one j in variable maxi
+        cntArr[j]=maxi;
+    }
+    finalMaxi=cntArr[0];
+    for (l=1;l<5;l++){
+        if (cntArr[l]>=finalMaxi){
+            finalMaxi=cntArr[l];
+        }
+    }
+    printf("The biggest sum of the contiguous subarray of this array is %d",finalMaxi);
+}
+void function28(){
+    int numArr[5];
+    int cntArr[5]; //contains the frequency of each element, 0 as duplicate values that are already counted
+    int i,j,k,l;
+    printf("Write a program to find the majority element of an array\n");
+    printf("Enter the elements for this array\n");
+    for (i=0;i<5;i++){
+        scanf("%d",&numArr[i]);
+        cntArr[i]=-1;
+    }
+    for (j=0;j<5;j++){
+        int cnt=1;
+        for (k=j+1;k<5;k++){
+            if (numArr[j]==numArr[k]){
+                cnt++;
+                cntArr[k]=0;
+            }
+        }
+        if (cntArr[j]!=0){
+            cntArr[j]=cnt;
+        }
+    }
+    int mostFound=cntArr[0];
+    int theIndex=0;
+    for (l=1;l<5;l++){
+        if (cntArr[l]>mostFound){
+            mostFound=cntArr[l];
+            theIndex=l;
+        }
+    }
+    printf("The most found element of this array is %d, with the frequency of %d",numArr[theIndex],mostFound);
+}
+void function29()
+{
+    printf("Write a program to print all unique elements of an array\n");
+    int arr[5], freq[5];
+    int i, j, count;
+    printf("Enter elements in array: ");
+    for(i=0; i<5; i++)
+    {
+        scanf("%d", &arr[i]);
+        freq[i] = -1;
+    }
+
+
+    for(i=0; i<5; i++)
+    {
+        count = 1;
+        for(j=i+1; j<5; j++)
+        {
+            if(arr[i]==arr[j])
+            {
+                count++;
+                freq[j] = 0;
+            }
+        }
+        if(freq[i] != 0)
+        {
+            freq[i] = count;
+        }
+    }
+
+    for(i=0; i<5; i++)
+    {
+        if(freq[i] ==1)
+        {
+            printf("%d is the unique element of this array\n",arr[i]);
+        }
+    }
+}
+void function30(){
+    printf("Write a program in C to find the maximum repeating number in a given array");
+    printf("This is the same as 28!! SKIP");
+}
+int summation31(int *j, int *k){
+    int sum = *j + *k;
+    return sum;
+}
+void function31(){
+    int a,b;
+    printf("Write a function to add numbers using call by reference\n");
+    printf("Enter first number to add\n");
+    scanf("%d",&a);
+    printf("Enter second number to add\n");
+    scanf("%d",&b);
+    printf("The summation of the two numbers %d and %d is %d",a,b,summation31(&a,&b));
+    
+}
+int length32(char *p,int cnt){
+    while (*p!='\0'){
+        p++;
+        cnt++;
+    }
+    return cnt;
+}
+void function32(){
+    char str[100];
+    int cnt=0;
+    printf("Write a program to calculate the length of the string using a pointer\n");
+    printf("Enter a string\n");
+    scanf("%s",str);
+    //gets(str);
+    printf("The length of this string %s is %d",str,length32(str,cnt));
+}
+void function33(){
+    char str[100];
+    int i;
+    printf("Write a program to print the reverse string of a string\n");
+    printf("Enter the string\n");
+    scanf("%s",str);
+    int length=strlen(str);
+    for (i=length-1;i>=0;i--){
+        printf("%c",*(str+i));
+    }
+}
+void function34(){
+    char str[100];
+    int i;
+    printf("Write a program to separate each characters from the string\n");
+    printf("Enter the string\n");
+    scanf("%s",str);
+    int leng=strlen(str);
+    for (i=0;i<leng;i++){
+        printf("%c ",*(str+i));
+    }
+}
+void function35(){
+    char str1[100];
+    char str2[100];
+    int i;
+    int flag=-1;
+    printf("Write a program to compare two strings without using string library functions\n");
+    printf("Enter the first string\n");
+    scanf("%s",str1);
+    printf("Enter the second string\n");
+    scanf("%s",str2);
+    if (strlen(str1)!=strlen(str2)){
+        printf("The two strings given are not equal\n");
+    }
+    else{
+        for (i=0;i<strlen(str1);i++){
+            if (str1[i]!=str2[i]){
+                printf("The two strings given are not equal");
+                break;
+            }
+            else{
+                flag=1;
+            }
+        }
+    }
+    if (flag==1){
+        printf("The two strings are equal");
+    }
+}
+void function36(){
+    char str[100]="I have an apple";
+    char word[100];
+    int i,j;
+    int flag=-1;
+    printf("Write a program to check if a given word is in the string\n");
+    printf("Enter the word\n");
+    scanf("%s",word);
+    for (i=0;i<strlen(str);i++){
+        if (word[0]==str[i]){
+            int theIndex=i; //starting point where a part of the string is same to the given word
+            for (j=theIndex;j<strlen(word)+theIndex;j++){
+                //apple->0,1,2,3,4  I have an 'apple'->10,11,12,13,14
+                if (str[j]==word[j-theIndex]){
+                    flag=1;
+                }
+                else{
+                    flag=-1;
+                    break;
+                }
+            }
+        }
+        
+    }
+
+    if (flag==1){
+        printf("The word %s is in the string",word);
+    }
+    else if (flag==-1){
+        printf("The word %s is not in the string",word);
+    }
+    
+    
+    
+}
+void function37(){
+    char string[100]="Fox is the the the animal";
+    char the[15]="the";
+    printf("Write a program to find the number of times a given word 'the' appears in the given string.\n");
+    int i,j;
+    int cnt=0;
+    for (i=0;i<strlen(string);i++){
+        if (string[i]=='t'){
+            int theIndex=i;
+            for (j=theIndex;j<strlen(the)+theIndex;j++){
+                if (string[j]==the[j-theIndex]){
+                    cnt++;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+    }
+    cnt=cnt/strlen(the);
+    printf("The number of times the word 'the' appears in the string %s is %d",string,cnt);
+    
+}
+void function38(){
+    char str[100];
+    int i=0;
+    printf("Write a program to convert a string to uppercase\n");
+    printf("Enter a string\n");
+    gets(str);
+    while (str[i]!='\0'){
+        if (str[i]>='a' && str[i]<='z'){
+            str[i]-=32;
+        }
+        i++;
+    }
+    printf("%s",str);
+    
+}
+void function39(){
+    char random[100];
+    char c;
+    int i=0;
+    printf("Write a program to replace the spaces of a string with a specific character\n");
+    printf("Enter a random string\n");
+    gets(random);
+    printf("Enter a character you want to replace the spaces with\n");
+    c=getchar();
+    while (random[i]!='\0'){
+        if (random[i]==' '){
+            random[i]=c;
+        }
+        i++;
+    }
+    printf("%s",random);
+}
+void function40(){
+    printf("Write a program to check whether a letter is uppercase or not\n");
+    printf("Enter a character\n");
+    char c;
+    c=getchar();
+    if (c>='a' && c<='z'){
+        printf("This letter is not a uppercase letter");
+    }
+    else{
+        printf("This letter is an uppercase letter");
+    }
+}
+int main() 
+{
+    //function26();
+    //function27();
+    //function28();
+    //function29();
+    //function30();
+    //function31();
+    //function32();
+    //function33();
+    //function34();
+    //function35();
+    //function36();
+    //function37();
+    //function38();
+    //function39();
+    function40();
+}
+
+
