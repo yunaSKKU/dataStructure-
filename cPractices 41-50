@@ -8,6 +8,8 @@ Code, Compile, Run and Debug online from anywhere in world.
 *******************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#define MAX 256
 
 void function41(){
     int numArr[5];
@@ -202,47 +204,37 @@ void function49(){
 	fclose(fp);
 }
 void function50(void){
-	FILE *fp;
-	char ch1,ch2,ch3;
-	int line=0;
-	int n;
-	char newLine[100];
-	fp=fopen("story.txt","r");
-	while ((ch1=fgetc(fp))!=EOF){
-		printf("%c",ch1);
-		if (ch1=='\n'){
-			line++;
-		}
-	} //line 정보 보유    
-	//printf("%d",line);
-	printf("Enter the line number to change the content of the file\n");
-	scanf("%d",&n);
-	int lineCount=0;
-	if (n>line){
-		printf("Line out of range\n");
-	}
-	else{
-		printf("Enter the new content\n");
-		scanf("%s",newLine);
-		while ((ch2=fgetc(fp))!=EOF){
-			if (lineCount==n){
-				fscanf(fp,"%s",newLine);
-				break;
-			}
-			else{
-				if (ch2=='\n'){
-					lineCount++;
-				}
-			}
-			
-		}
-	} //내용 달라짐 
-	while ((ch3=fgetc(fp))!=EOF){
-		printf("%c",ch3);
-	} 
-	fclose(fp);
+    FILE *fp1, *fp2;
+    int lnum,lineCount=0;
+    char newline[MAX],string[MAX];
+    char ch;
 	
-}
+    fp1=fopen("story.txt","r");
+    fp2=fopen("newStory.txt","w");
+    printf("Enter your new input line(to replace): ");
+    fgets(newline,MAX,stdin);
+    printf("Enter the line number of the line you want to replace: ");
+    scanf("%d",&lnum);
+    while (!feof(fp1)){
+	strcpy(string,"\0");
+	fgets(string,MAX,fp1);
+	if (!feof(fp1)){
+	    lineCount++;
+	    if (lineCount!=lnum){
+		fprintf(fp2,"%s",string);
+	    }
+	    else{
+		fprintf(fp2,"%s",newline);
+	    }
+	}
+    }
+	
+    fclose(fp1);
+    fclose(fp2);
+    remove("story.txt");
+    rename("newStory.txt","story.txt");
+    return 0;
+} 
 int main()
 {
     //function41();
