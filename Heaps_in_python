@@ -1,0 +1,56 @@
+class BinaryHeap:
+    def __init__(self,array=[]):
+        self.items=array
+    def size(self):
+        return len(self.items)
+    def swap(self,i,j):
+        self.items[i],self.items[j] = self.items[j],self.items[i]
+    def upheap(self,i):
+        while i>0 and self.items[(i-1)//2] > self.items[i]:
+            #부모노드가 자식노드보다 큰 조건 동안 계속 swap해주기
+            self.swap(i,(i-1)//2)
+            i=(i-1)//2 #부모가 자식이 되도록, 위로 올라가면서 힙 속성 충족 
+    def insert(self,key):
+        self.items.append(key)
+        self.upheap(self.size()-1)
+    def downheap(self, i):
+        while 2*i+1<=self.size()-1:
+            k=2*i+1 #부모가 i, 왼쪽 자식이 k.
+            if k<self.size()-1 and self.items[k]>self.items[k+1]:
+                k=k+1
+            if self.items[i]<self.items[k]:
+                break
+            #self.items[i]>self.items[k], 부모가 자식보다 크면 안 되니까 바꿔줘
+            self.swap(i,k) 
+            i=k #자식을 부모가 되도록, 아래로 내려가면서 힙 속성 충족
+    def extract_min(self):
+        if self.size()==0:
+            print("Heap is empty")
+            return None
+        minimum=self.items[0]
+        self.swap(0,-1)
+        del self.items[-1]
+        self.downheap(0)
+        return minimum
+    def buildheap(self,array):
+        for i in range(len(array)//2-1,-1,-1):
+            self.downheap(i)
+    def printheap(self):
+        for i in range(0,self.size()):
+            print(self.items[i],end=' ')
+
+array=[5,3,4,6,1]
+bheap=BinaryHeap(array)
+bheap.buildheap(array)
+bheap.printheap()
+print("\n")
+bheap.insert(0)
+bheap.insert(2)
+bheap.insert(19)
+bheap.printheap()
+print("\n")
+print(bheap.extract_min())
+print("\n")
+print(bheap.extract_min())
+print("\n")
+bheap.printheap()
