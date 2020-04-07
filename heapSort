@@ -1,0 +1,35 @@
+#최대힙으로 구성, 이후에 heapsort
+def downheap(i,size):
+    while 2*i+1<=size:
+        k=2*i+1  #왼쪽 자식
+        if k<size-1 and items[k]<items[k+1]:
+            k+=1
+        #부모의 우선순위가 자식보다 높으면 break
+        #==부모의 item이 자식의 item보다 크면 break
+        if items[i]>=items[k]:
+            break
+        items[i],items[k] = items[k],items[i]
+        i=k #자식이 부모가 되어 downheap 진행
+        
+def heapify(items):
+    hsize=len(items)
+    for i in range(hsize//2-1,-1,-1):
+        downheap(i,hsize)
+
+def heap_sort(items):
+    N=len(items)
+    for i in range(N):
+        items[0],items[N-1] = items[N-1], items[0]
+        downheap(0,N-2)
+        N-=1
+
+items=[1,3,2,4,0]
+print("정렬 전 : ",end=' ')
+print(items)
+heapify(items)
+print("최대 힙: ",end=' ')
+print(items)
+heap_sort(items)
+print("정렬 후: ",end=' ')
+print(items)
+
