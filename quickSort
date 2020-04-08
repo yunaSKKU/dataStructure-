@@ -1,0 +1,33 @@
+def partition(items,pivot,high): 
+    #return pivot
+    i=pivot+1
+    j=high
+    while True:
+        #i,j에 해당하는 값 찾을 때까지 i와 j는 각각 오른쪽 방향, 왼쪽 방향으로 이동
+        while i<high and items[i]<items[pivot]:
+            i+=1
+        while j>pivot and items[j]>items[pivot]:
+            j-=1
+        #만약 j<=i인 경우에는 break
+        if j<=i:
+            break
+        #i,j로 원하는 값을 찾았을 경우에는 swap, i와 j 한칸씩 이동시켜 나머지 원소 전부에 대해 훑게
+        items[i],items[j] = items[j], items[i]
+        i+=1
+        j-=1
+        #최종: j와 pivot 자리 교체
+    items[pivot], items[j] = items[j], items[pivot]
+    return j #pivot not placed in the front, 큰 서브리스트와 작은 서브리스트를 나누는 구간에 위치
+
+def quickSort(items,low,high):
+    if low<high: 
+        pivot=partition(items,low,high)
+        quickSort(items,low,pivot-1) #좌측 서브리스트에 대해 recursive function
+        quickSort(items,pivot+1,high) #우측 서브리스트에 대해 recurisve function
+
+items=[26,5,37,1,61,11,59,15,48,19]
+print("정렬 전: ",end=' ')
+print(items)
+quickSort(items,0,len(items)-1)
+print("정렬 후: ", end=' ')
+print(items)
