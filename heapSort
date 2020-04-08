@@ -16,20 +16,25 @@ def heapify(items):
     for i in range(hsize//2-1,-1,-1):
         downheap(i,hsize)
 
-def heap_sort(items):
-    N=len(items)
-    for i in range(N):
-        items[0],items[N-1] = items[N-1], items[0]
-        downheap(0,N-2)
-        N-=1
+def heap_sort(items,newSorted):
+    hsize=len(items)
+    for i in range(hsize,0,-1):#hsize=5
+        #i=5,4,3,2,1 다섯번 동안 반복
+        items[0],items[hsize-1] = items[hsize-1], items[0]
+        newSorted.append(items[hsize-1])
+        del items[hsize-1]
+        downheap(0,hsize-2)
+        hsize-=1
 
 items=[1,3,2,4,0]
+newSorted=[]
 print("정렬 전 : ",end=' ')
 print(items)
 heapify(items)
 print("최대 힙: ",end=' ')
 print(items)
-heap_sort(items)
+heap_sort(items,newSorted)
 print("정렬 후: ",end=' ')
-print(items)
+
+print(sorted(newSorted))
 
